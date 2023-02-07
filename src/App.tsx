@@ -3,7 +3,6 @@ import Web3 from "web3";
 import axios from "axios";
 
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 
 import { getAuth, signInWithCustomToken, signOut } from "firebase/auth";
 
@@ -25,7 +24,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const analytics = getAnalytics(app);
 
 const App = () => {
   const [loading, setLoading] = React.useState(false);
@@ -33,6 +31,7 @@ const App = () => {
   const isMobile = React.useMemo(() => mobileCheck(), []);
 
   const onPressConnect = async () => {
+    debugger;
     setLoading(true);
 
     try {
@@ -42,11 +41,13 @@ const App = () => {
 
       if (window?.ethereum?.isMetaMask) {
         // Desktop browser
-        const accounts = await window.ethereum.request({
+        const accounts = await window.ethereum.request<string[]>({
           method: "eth_requestAccounts",
         });
+        const [accountFromRequest] = accounts as string[];
+        if (!accountFromRequest) return;
 
-        const account = Web3.utils.toChecksumAddress(accounts[0]);
+        const account = Web3.utils.toChecksumAddress(accountFromRequest);
         await handleLogin(account);
       } else if (isMobile) {
         // Mobile browser
@@ -56,7 +57,8 @@ const App = () => {
         window.open(downloadMetamaskUrl);
       }
     } catch (error) {
-      console.log(error);
+      // user closed connect provider modal and error is thrown
+      //No provider selected for request eth_requestAccounts
       setAddress("");
     }
 
@@ -67,13 +69,18 @@ const App = () => {
     const baseUrl = "http://localhost:4000";
     const response = await axios.get(`${baseUrl}/message?address=${address}`);
     const messageToSign = response?.data?.messageToSign;
+    const password = "";
 
     if (!messageToSign) {
       throw new Error("Invalid message to sign");
     }
 
     const web3 = new Web3(Web3.givenProvider);
-    const signature = await web3.eth.personal.sign(messageToSign, address);
+    const signature = await web3.eth.personal.sign(
+      messageToSign,
+      address,
+      password
+    );
 
     const jwtResponse = await axios.get(
       `${baseUrl}/jwt?address=${address}&signature=${signature}`
