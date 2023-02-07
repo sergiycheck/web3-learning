@@ -35,7 +35,8 @@ const App = () => {
     setLoading(true);
 
     try {
-      const yourWebUrl = "mysite.com"; // Replace with your domain
+      const yourWebUrl = `${window.location.href.replace(`http://`, "")}`; // Replace with your domain
+
       const deepLink = `https://metamask.app.link/dapp/${yourWebUrl}`;
       const downloadMetamaskUrl = "https://metamask.io/download.html";
 
@@ -66,7 +67,8 @@ const App = () => {
   };
 
   const handleLogin = async (address) => {
-    const baseUrl = "http://localhost:4000";
+    const baseUrl = `http://${isMobile ? "10.0.2.2" : "localhost"}:4000`;
+
     const response = await axios.get(`${baseUrl}/message?address=${address}`);
     const messageToSign = response?.data?.messageToSign;
     const password = "";
