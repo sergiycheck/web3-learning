@@ -30,8 +30,10 @@ const App = () => {
   const [address, setAddress] = React.useState("");
   const isMobile = React.useMemo(() => mobileCheck(), []);
 
+  // can not choose metamask or
+  // coinbase providers
+  // TODO: investigate behaviour
   const onPressConnect = async () => {
-    debugger;
     setLoading(true);
 
     try {
