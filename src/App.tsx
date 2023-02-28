@@ -1,34 +1,51 @@
 import React from "react";
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  useParams,
   useRouteMatch,
 } from "react-router-dom";
 
-export default function NestingExample() {
+import { LoginWithMetamaskOrCoinbase } from "./components/login-with-metamask-or-coinbase/index";
+
+import s from "./App.module.css";
+
+const routes = {
+  home: "/",
+  diff_signins: {
+    name: "/diff_signins",
+    nested: {
+      connect_metamask_or_coninbase_1: "connect_metamask_or_coninbase_1",
+      sign_in_2: "sign_in_2",
+    },
+  },
+};
+
+export default function App() {
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/topics">Topics</Link>
-          </li>
-        </ul>
+        <nav>
+          <ul className={s.navigation}>
+            <li>
+              <Link to={routes.home}>Home</Link>
+            </li>
+            <li>
+              <Link to={routes.diff_signins.name}>Diff sign ins</Link>
+            </li>
+          </ul>
+        </nav>
 
         <hr />
 
         <Switch>
-          <Route exact path="/">
+          <Route exact path={routes.home}>
             <Home />
           </Route>
-          <Route path="/topics">
-            <Topics />
+          <Route path={routes.diff_signins.name}>
+            <DiffSignIns />
           </Route>
         </Switch>
       </div>
@@ -39,26 +56,29 @@ export default function NestingExample() {
 function Home() {
   return (
     <div>
-      <h2>Home</h2>
+      <h2>React 17 examples of web3 login and other features</h2>
     </div>
   );
 }
 
-function Topics() {
+function DiffSignIns() {
   let { path, url } = useRouteMatch();
 
   return (
     <div>
-      <h2>Topics</h2>
+      <h2>Diff sign-ins</h2>
       <ul>
         <li>
-          <Link to={`${url}/rendering`}>Rendering with React</Link>
+          <Link
+            to={`${url}/${routes.diff_signins.nested.connect_metamask_or_coninbase_1}`}
+          >
+            connect_metamask_or_coninbase_1
+          </Link>
         </li>
         <li>
-          <Link to={`${url}/components`}>Components</Link>
-        </li>
-        <li>
-          <Link to={`${url}/props-v-state`}>Props v. State</Link>
+          <Link to={`${url}/${routes.diff_signins.nested.sign_in_2}`}>
+            sign_in_2
+          </Link>
         </li>
       </ul>
 
@@ -66,20 +86,23 @@ function Topics() {
         <Route exact path={path}>
           <h3>Please select a topic.</h3>
         </Route>
-        <Route path={`${path}/:topicId`}>
-          <Topic />
+        <Route
+          path={`${path}/${routes.diff_signins.nested.connect_metamask_or_coninbase_1}`}
+        >
+          <LoginWithMetamaskOrCoinbase />
+        </Route>
+        <Route path={`${path}/${routes.diff_signins.nested.sign_in_2}`}>
+          <SignIn2 />
         </Route>
       </Switch>
     </div>
   );
 }
 
-function Topic() {
-  let { topicId } = useParams();
-
+function SignIn2() {
   return (
     <div>
-      <h3>{topicId}</h3>
+      <h3>Sign In 2</h3>
     </div>
   );
 }
