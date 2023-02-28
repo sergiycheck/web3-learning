@@ -11,6 +11,7 @@ import mobileCheck from "../../utils/mobileCheck";
 import getLinker from "../../utils/deepLink";
 
 import s from "./index.module.css";
+import { MetaMaskInpageProvider } from "@metamask/providers";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDV-ty2-g3KXAkEbIQGYJDE1XxgAVuaKWU",
@@ -42,9 +43,10 @@ export const LoginWithMetamaskOrCoinbase = () => {
       const deepLink = `https://metamask.app.link/dapp/${yourWebUrl}`;
       const downloadMetamaskUrl = "https://metamask.io/download.html";
 
-      if (window?.ethereum?.isMetaMask) {
-        // Desktop browser
-        const accounts = await window.ethereum.request<string[]>({
+      const ethereum = window.ethereum as MetaMaskInpageProvider;
+      // Desktop browser
+      if (ethereum?.isMetaMask) {
+        const accounts = await ethereum.request<string[]>({
           method: "eth_requestAccounts",
         });
         const [accountFromRequest] = accounts as string[];

@@ -9,8 +9,6 @@ import mobileCheck from "../../../utils/mobileCheck";
 
 import styles from "./wallets.module.scss";
 
-// TODO: split into files
-
 export const Wallets = ({
   handleClick,
   showStyledSignInTopBar,
@@ -35,7 +33,7 @@ export const Wallets = ({
         icon: <WalletConnectLogo />,
       },
       {
-        id: "walletlink",
+        id: "coinbasewallet",
         title: "Coinbase",
         icon: <CoinBaseLogo />,
       },
