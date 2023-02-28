@@ -1,0 +1,103 @@
+@import "styles/variables";
+@import "styles/mixin";
+@import "styles/breakpoint";
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+
+  color: $white;
+
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background: $new-black;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+  @media (max-width: 450px) {
+    height: fit-content;
+  }
+}
+
+.top {
+  height: 50px;
+  background: $primary-yellow;
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  @include flex(row, center, center);
+
+  margin-bottom: 45px;
+}
+
+.rotated_div {
+  position: absolute;
+  top: 13px;
+  height: 60px;
+  width: 60px;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  background: $primary-yellow;
+}
+
+.logo {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.content {
+  @include flex(column, center, center);
+  padding: 0 20px;
+}
+
+.content {
+  &__title {
+    @include h3();
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    @include bodyFont();
+    color: $light-gray;
+    text-align: center;
+    width: 95%;
+  }
+
+  &__wallets {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  &__item {
+    @include flex(row, center, flex-start);
+    cursor: pointer;
+    padding: 20px 0;
+    border-bottom: 1px solid #232323;
+    transition: all 0.3s ease-in-out;
+
+    &:last-of-type {
+      border: none;
+    }
+    &:hover {
+      color: $primary-yellow;
+    }
+  }
+
+  &__wallet_name {
+    @include subHeader();
+    margin: 0;
+  }
+
+  &__logo {
+    margin-right: 12px;
+    width: 30px;
+    height: 30px;
+  }
+
+  &__button {
+    margin-top: 20px;
+  }
+}

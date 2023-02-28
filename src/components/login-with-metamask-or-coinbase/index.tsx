@@ -7,8 +7,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithCustomToken, signOut } from "firebase/auth";
 
 import ConnectWalletButton from "./components/ConnectWalletButton";
-import mobileCheck from "./helpers/mobileCheck";
-import getLinker from "./helpers/deepLink";
+import mobileCheck from "../../utils/mobileCheck";
+import getLinker from "../../utils/deepLink";
 
 import s from "./index.module.css";
 

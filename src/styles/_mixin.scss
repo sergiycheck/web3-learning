@@ -1,0 +1,111 @@
+@mixin flex($flex-direction, $aligin-item, $justify-content) {
+  display: flex;
+  flex-direction: $flex-direction;
+  align-items: $aligin-item;
+  justify-content: $justify-content;
+}
+
+@mixin font($font-family, $font-size, $font-weight, $line-height) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+//Topographic
+@mixin h1 {
+  font-size: 35px;
+  line-height: 120%;
+  font-weight: 700;
+  font-family: $lato;
+  font-style: normal;
+  @include mobile {
+    font-size: 29px;
+  }
+}
+
+@mixin h2 {
+  font-family: $lato;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  font-style: normal;
+  @include mobile {
+    font-size: 24px;
+  }
+}
+
+@mixin h3 {
+  font-family: $lato;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  font-style: normal;
+  @include mobile {
+    font-size: 20px;
+  }
+}
+
+@mixin subHeader {
+  font-family: $lato;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16.8px;
+  line-height: 120%;
+}
+
+@mixin label {
+  font-family: $lato;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  font-style: normal;
+}
+
+@mixin bodyFont {
+  font-family: $lato;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+}
+
+@mixin smallCaption {
+  font-family: $lato;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  font-style: normal;
+}
+
+@mixin abelLabel {
+  font-family: $abel;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140%;
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
+// Effect styles
+@mixin light {
+  background: #c4c4c4;
+  box-shadow: 0px 4px 50px 15px rgba(218, 218, 218, 0.5);
+}
+
+@mixin inputShadow {
+  background: #c4c4c4;
+  box-shadow: 0px 1px 5px 1px rgba(251, 203, 35, 0.25);
+}
+@mixin shadow {
+  background: #d9d9d9;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+@mixin shadowYellow {
+  background: #d9d9d9;
+  box-shadow: 0px 1px 1px 7px rgba(255, 240, 189, 0.12),
+    0px 2px 21px 3px rgba(251, 203, 35, 0.06);
+}

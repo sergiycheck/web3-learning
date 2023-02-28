@@ -1,5 +1,7 @@
 import React from "react";
 
+import s from "./App.module.scss";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +12,7 @@ import {
 
 import { LoginWithMetamaskOrCoinbase } from "./components/login-with-metamask-or-coinbase/index";
 
-import s from "./App.module.css";
+import { ConnectWithWeb3ModalV1DiffWallets } from "./components/web3modal-v1-connect";
 
 const routes = {
   home: "/",
@@ -18,7 +20,7 @@ const routes = {
     name: "/diff_signins",
     nested: {
       connect_metamask_or_coninbase_1: "connect_metamask_or_coninbase_1",
-      sign_in_2: "sign_in_2",
+      web3modal_v1_diff_wallets: "web3modal_v1_diff_wallets",
     },
   },
 };
@@ -76,8 +78,10 @@ function DiffSignIns() {
           </Link>
         </li>
         <li>
-          <Link to={`${url}/${routes.diff_signins.nested.sign_in_2}`}>
-            sign_in_2
+          <Link
+            to={`${url}/${routes.diff_signins.nested.web3modal_v1_diff_wallets}`}
+          >
+            web3modal_v1_diff_wallets
           </Link>
         </li>
       </ul>
@@ -91,18 +95,12 @@ function DiffSignIns() {
         >
           <LoginWithMetamaskOrCoinbase />
         </Route>
-        <Route path={`${path}/${routes.diff_signins.nested.sign_in_2}`}>
-          <SignIn2 />
+        <Route
+          path={`${path}/${routes.diff_signins.nested.web3modal_v1_diff_wallets}`}
+        >
+          <ConnectWithWeb3ModalV1DiffWallets />
         </Route>
       </Switch>
-    </div>
-  );
-}
-
-function SignIn2() {
-  return (
-    <div>
-      <h3>Sign In 2</h3>
     </div>
   );
 }

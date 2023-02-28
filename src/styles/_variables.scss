@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700;900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/bank-gothic');
+
+//Fonts
+$roboto: 'Roboto', sans-serif;
+$abel: 'Abel', sans-serif;
+$lato: 'Lato', sans-serif;
+$gothic: 'Bank Gothic', sans-serif;
+
+//Colors
+$primary-yellow: #fbcb23;
+$disabled-yellow: rgba(251, 203, 35, 0.5);
+$light-gray: #858585;
+$transparent-light-gray: rgba(133, 133, 133, 0.2);
+$dark-gray: #26272b;
+$error: #ff0056;
+$stop: #de2626;
+$main-black: #131313;
+$green: #27ae60;
+$dark-violet: #5a007f;
+$white: #ffffff;
+$black: #000000;
+$new-black: #191919;
+$landing-bg: #0e0e0e;
+
+$primary-yellow-gradient: linear-gradient(180deg, #fbcb23 0%, #a17e00 100%);
+$hover_item_bg_gradient: linear-gradient(rgba(0, 0, 0, 0), rgba(19, 19, 19, 0.9));
+$const_item_bg_gradient: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+
+$header-height: 65px;
+
+//Sizes
+$sm-mobile-width: 360px;
+$mobile-width: 590px;
+$tablet-width: 768px;
+$desktop-width: 1100px;
+
+//z-indexes
+$profile-menu-index: 1001;
+$frame-card-overlay: 11;
+$cast-pop-up: 12;
+$pop-up: 100;
+$display-settings-popup: 150;
+$schedule-settings: 160;
+$mobile-header-popup: 170;
