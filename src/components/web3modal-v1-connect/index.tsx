@@ -6,6 +6,7 @@ import Web3Modal from "web3modal";
 
 import { Wallets } from "./Wallets/Wallets";
 import Web3 from "web3";
+// import { Connection, clusterApiUrl } from "@solana/web3.js";
 
 const providersNames = {
   ethereum: {
@@ -52,7 +53,9 @@ const web3Modal = new Web3Modal({
 });
 
 export const ConnectWithWeb3ModalV1DiffWallets = () => {
-  const [accounts, setAccounts] = React.useState<string[]>([]);
+  const [walletsData, setWalletsData] = React.useState<{
+    [key: string]: { account: string; balance: string };
+  } | null>(null);
 
   React.useEffect(() => {
     function clearWeb3ModalCachedProvider() {
@@ -78,11 +81,23 @@ export const ConnectWithWeb3ModalV1DiffWallets = () => {
 
         const [account] = accounts;
 
-        setAccounts((prev) => {
-          if (prev.includes(account)) {
-            return prev;
+        const balance = await web3.eth.getBalance(account);
+
+        setWalletsData((prev) => {
+          const newItem = {
+            [account]: {
+              account,
+              balance,
+            },
+          };
+          if (prev) {
+            return {
+              ...prev,
+              ...newItem,
+            };
           }
-          return [...prev, account];
+
+          return { ...newItem };
         });
       } catch (error) {
         console.log(error);
@@ -90,13 +105,30 @@ export const ConnectWithWeb3ModalV1DiffWallets = () => {
     } else if (Object.values(providersNames.solana).find(predicate)) {
       if (window?.solana?.isPhantom) {
         const { publicKey } = await window.solana.connect();
+
+        // const connection = new Connection(
+        //   clusterApiUrl("mainnet-beta"),
+        //   "confirmed"
+        // );
+        // const balance = await connection.getBalance(publicKey);
+
         const account = publicKey.toString();
 
-        setAccounts((prev) => {
-          if (prev.includes(account)) {
-            return prev;
+        setWalletsData((prev) => {
+          const newItem = {
+            [account]: {
+              account,
+              balance: "0",
+            },
+          };
+          if (prev) {
+            return {
+              ...prev,
+              ...newItem,
+            };
           }
-          return [...prev, account];
+
+          return { ...newItem };
         });
       }
     }
@@ -106,9 +138,15 @@ export const ConnectWithWeb3ModalV1DiffWallets = () => {
     <div>
       <h2>Diff wallets connect wiht web3modal v1</h2>
       <h3>All accounts:</h3>
-      {accounts?.map((account) => (
-        <p key={account}>{account}</p>
-      ))}
+
+      {walletsData &&
+        Object.values(walletsData)?.map((wallet) => (
+          <div key={wallet.account}>
+            <p>
+              account: {wallet.account}, <span>balance: {wallet.balance}</span>
+            </p>
+          </div>
+        ))}
       <Wallets
         connectWalletTitlePText="Connect more wallets to access all of your 
             NFTs in a single profile."
