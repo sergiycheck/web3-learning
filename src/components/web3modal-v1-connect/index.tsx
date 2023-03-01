@@ -5,6 +5,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
 
 import { Wallets } from "./Wallets/Wallets";
+import Web3 from "web3";
 
 const providersNames = {
   ethereum: {
@@ -72,9 +73,8 @@ export const ConnectWithWeb3ModalV1DiffWallets = () => {
           provider.selectedProvider = metamaskProvider;
         }
 
-        const accounts = await provider.request({
-          method: "eth_requestAccounts",
-        });
+        const web3 = new Web3(provider);
+        const accounts = await web3.eth.getAccounts();
 
         const [account] = accounts;
 
